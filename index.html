@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>The Signature Craft Burger | Gourmet Bistro AR Menu</title>
+  <meta name="description" content="Scan the QR code and place our ultra-realistic 3D signature craft burger on your table in augmented reality.">
+  
+  <!-- Google Fonts for Premium Aesthetics -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- ES Module Importmap for Three.js CDN -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Landing Page -->
+  <main id="landing-page">
+    <header class="header">
+      <div class="logo">GOURMET BISTRO</div>
+      <div class="header-divider"></div>
+    </header>
+
+    <div class="content-container">
+      <!-- 3D Hero Preview Column -->
+      <div class="preview-column">
+        <div id="preview-container">
+          <!-- Loading Overlay -->
+          <div id="loading-overlay">
+            <div class="spinner"></div>
+            <p id="loading-text">Preparing Gastronomy Experience...</p>
+            <div class="progress-bar">
+              <div id="progress-bar-fill"></div>
+            </div>
+            <p id="loading-percentage">0%</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Description and Details Column -->
+      <div class="details-column">
+        <span class="tag">Chef's Special Selection</span>
+        <h1 class="dish-title">The Signature Craft Burger</h1>
+        <div class="dish-price">$18.50</div>
+        
+        <p class="dish-description">
+          A culinary masterpiece featuring double flame-grilled Prime Angus Beef patties, layers of melted vintage English Cheddar, crisp butter lettuce, vine-ripened tomatoes, and our signature truffle-infused house aioli. Served on a toasted, butter-brushed artisanal brioche bun.
+        </p>
+
+        <!-- Ingredients Badges -->
+        <div class="section-title">Key Ingredients</div>
+        <div class="ingredients-list">
+          <span class="ingredient-badge">Prime Angus Beef</span>
+          <span class="ingredient-badge">Vintage Cheddar</span>
+          <span class="ingredient-badge">Truffle Aioli</span>
+          <span class="ingredient-badge">Artisanal Brioche</span>
+          <span class="ingredient-badge">Vine-Ripened Tomato</span>
+        </div>
+
+        <div class="specs-grid">
+          <div class="spec-item">
+            <span class="spec-label">Prep Time</span>
+            <span class="spec-value">12-15 min</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Calories</span>
+            <span class="spec-value">840 kcal</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Scale</span>
+            <span class="spec-value">Real-World (1:1)</span>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="cta-container">
+          <button id="ar-button" class="btn btn-primary" disabled>
+            <span class="btn-icon">⚡</span>
+            <span class="btn-text">Initializing AR...</span>
+          </button>
+          
+          <!-- Desktop Fallback Instruction -->
+          <div id="desktop-fallback" class="hidden">
+            <div class="desktop-fallback-card">
+              <img id="fallback-qr" src="" alt="Scan for AR Menu" class="fallback-qr-img" />
+              <div class="fallback-text-container">
+                <div class="fallback-title">Scan to View in AR</div>
+                <p class="fallback-desc">Point your phone's camera at this QR code to experience this burger on your own table in real-world scale.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <p>&copy; 2026 Gourmet Bistro. Experience powered by WebAR.</p>
+    </footer>
+  </main>
+
+  <!-- WebXR DOM Overlay for AR Mode (Active during AR session) -->
+  <div id="ar-overlay">
+    <!-- Close Button -->
+    <button id="ar-close" aria-label="Exit AR">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Top Branding Watermark -->
+    <div class="ar-watermark">
+      <span>GOURMET BISTRO AR</span>
+    </div>
+
+    <!-- UI Interaction Helper Controls -->
+    <div id="ar-controls" class="hidden">
+      <button id="ar-reset" class="ar-control-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+        </svg>
+        <span>Reset Size</span>
+      </button>
+    </div>
+
+    <!-- Dynamic Instruction Card -->
+    <div class="ar-instruction-card">
+      <div id="ar-status-indicator" class="ar-status-pulse"></div>
+      <div class="ar-instruction-content">
+        <div id="ar-status-title">Scanning Environment</div>
+        <p id="ar-status-desc">Move your phone slowly from side to side to map your table surface.</p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
